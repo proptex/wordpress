@@ -74,8 +74,12 @@ RUN set -eux; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 # redis support
 RUN pecl install -o -f redis \
-&&  rm -rf /tmp/pear \
-&&  docker-php-ext-enable redis
+  &&  rm -rf /tmp/pear \
+  &&  docker-php-ext-enable redis
+# xhprof support (profiling)
+RUN pecl install -o -f xhprof \
+  &&  rm -rf /tmp/pear \
+  &&  docker-php-ext-enable xhprof
 # https://wordpress.org/support/article/editing-wp-config-php/#configure-error-logging
 RUN { \
 # https://www.php.net/manual/en/errorfunc.constants.php
